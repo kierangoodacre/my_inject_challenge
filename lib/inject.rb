@@ -1,6 +1,6 @@
 class Array
 
-  def my_inject n = nil, &block
+  def my_inject n = nil, s = nil, &block
       mem = self.shift
       self.each  do |item|
         mem = yield mem, item
