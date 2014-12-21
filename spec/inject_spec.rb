@@ -26,6 +26,7 @@ describe Array do
 
     it "should be able to add from a starting point" do
       expect([1,2,3,4].inject(15){|mem, item| mem + item}).to eq 25
+      expect([1,2,3,4].my_inject(15){|mem, item| mem + item}).to eq 25
     end
 
   end
