@@ -3,14 +3,13 @@ class Array
   def my_inject n = nil, &block
       mem = self.shift
       self.each  do |item|
-        if n
         mem = yield mem, item
-        n + mem
-          else
-          mem = yield mem, item
-        end
       end
-    mem
+      if n != nil
+        n + mem
+          elsif n == nil
+          mem
+      end
   end
 
 end
