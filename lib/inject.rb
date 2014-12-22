@@ -5,9 +5,13 @@ class Array
       self.each  do |item|
         mem = yield mem, item
       end
-      if n != nil
+      if n != nil && s == nil
         n + mem
-          elsif n == nil
+          elsif n == nil && s != nil
+          mem = self.shift
+          self.each{|mem, item| mem + item}
+        end
+        else
           mem
       end
   end
