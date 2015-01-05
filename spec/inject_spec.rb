@@ -25,7 +25,7 @@ describe Array do
   context "WITH AN ARGUMENT AND A BLOCK".colorize :blue do
 
     it "should be able to add from a starting point" do
-      expect([1,2,3,4].inject(15){|mem, item| mem + item}).to eq 25
+      expect([1,2,3,4].inject(15){|mem, item| mem - item}).to eq 5
       expect([1,2,3,4].my_inject(15){|mem, item| mem + item}).to eq 25
     end
 
@@ -43,7 +43,7 @@ describe Array do
   context "WITH AN ARGUMENT AS A NUMBER".colorize :blue do
 
     it "should be able to pass an argument as a number" do
-      expect([1,2,3,4].inject(15)).to eq 25
+      expect([1,2,3,4].inject(:+)).to eq 10
     end
 
   end
