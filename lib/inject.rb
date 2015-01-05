@@ -1,30 +1,13 @@
 class Array
 
-  def my_inject n = nil, *block
-      copy = self.dup
-      if ((block[0].is_a? Symbol) && (n.is_a? Integer)) 
-        mem = n
-        block1 = block[0].to_proc
-        copy.each do |item|
-          mem = block1.call(mem, item)
-        end
-      elsif n.is_a? Integer
-        mem = n
-        copy.each do |item|
-          mem = yield mem, item
-        end
-      elsif block[0].is_a? Symbol
-        mem = copy.shift
-        n1 = n.to_proc
-        copy.each do |item|
-          mem = n1.call(mem, item)
-        end
-      else mem = copy.shift
-            copy.each  do |item|
-            mem = yield mem, item
-          end
-      end
-      mem
+  def my_inject n = nil, block= nil
+    copy = self.dup
+    mem = (n.is_a? Fixnum)? n : copy.shift
+    copy.each {|item| mem = mem.send(block, item)}  if (block.is_a? Symbol) && (n.is_a? Integer)
+    copy.each {|item| mem = mem.send(n, item)}      if (n.is_a? Symbol) 
+    copy.each {|item| mem = yield mem, item}        if (n.is_a? Fixnum) && !block
+    copy.each {|item| mem = yield mem, item}        unless n
+    mem
   end
 
 end
